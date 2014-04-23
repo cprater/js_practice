@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simon Says</title>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script>$(function(){
+		var colors = ["red", "green", "blue", "yellow", "orange", "purple", "black", "brown", "pink"];
+
+		var generateRandom = function(){
+			return Math.floor(Math.random() * (9 - 1 + 1)) + 1;
+		};
+
+		$('.play').on('click', function(e){
+			e.preventDefault();
+			console.log($('.board li:nth-child('+ generateRandom() +')').find('.tile'));
+			$('.board li:nth-child('+ generateRandom() +')').find('.tile').css('background-color', colors[generateRandom()]);
+		});
+
+	});</script>
+</head>
+<body>
+	<h2>A stupid color changing line that doesn't look or play like Simon Says at all</h2>
+	<a href="#" class="play">Play!</a>
+	<ul class="board" style="list-style: none">
+		<li><div class="tile" style="height: 25px; width: 25px; border: 1px solid black"></div></li>
+		<li><div class="tile" style="height: 25px; width: 25px; border: 1px solid black"></div></li>
+		<li><div class="tile" style="height: 25px; width: 25px; border: 1px solid black"></div></li>
+		<li><div class="tile" style="height: 25px; width: 25px; border: 1px solid black"></div></li>
+		<li><div class="tile" style="height: 25px; width: 25px; border: 1px solid black"></div></li>
+		<li><div class="tile" style="height: 25px; width: 25px; border: 1px solid black"></div></li>
+		<li><div class="tile" style="height: 25px; width: 25px; border: 1px solid black"></div></li>
+		<li><div class="tile" style="height: 25px; width: 25px; border: 1px solid black"></div></li>
+		<li><div class="tile" style="height: 25px; width: 25px; border: 1px solid black"></div></li>
+	</ul>
+</body>
+</html>
