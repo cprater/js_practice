@@ -1,5 +1,45 @@
+Array.prototype.sortIntegersAsc = function(){
+	return this.sort(function(a,b){return a - b})
+};
+
+Array.prototype.includes = function(element){
+	for (i=0; i < this.length; i++){
+		if(this[i] == element)
+			return true;
+	}
+	return false;
+};
+
+Array.prototype.sum = function(){
+	total = 0;
+	for(i = 0; i < this.length; i++){
+		total += this[i];
+	}
+	return total;
+};
+
+Array.prototype.multiply = function(){
+	total = 1;
+	for(i = 0; i < this.length; i++){
+		total *= this[i];
+	}
+	return total;
+};
+
+Array.prototype.sortByLengthAsc = function(){
+	return this.sort(function(a,b){return a.length - b.length});
+};
+
+String.prototype.isAVowel = function(){
+	v = ["a", "e", "i", "o", "u"];
+	return v.includes(this);
+};
+
+//^^^^^^Them prototypes sooon^^^^^^^^
+//vvvvvvThem functions sonvvvvvvvvv
+
 var Test = function(){
-	
+
 	this.max = function(num1, num2){
 		if (num1 > num2)
 			return num1;
@@ -8,93 +48,56 @@ var Test = function(){
 	};
 
 	this.maxOfThree = function(numbers){
-		numbers.sort(function(a,b){return a - b});
-		return numbers[numbers.length - 1];
+		return numbers.sortIntegersAsc().pop();
 	};
 
 	this.isVowel = function(letter){
-		var vowels = ["a", "e", "i", "o", "u", "y"];
-		for (i=0; i < vowels.length; i++){
-			if ( vowels[i] == letter)
-				return true;
-		}
-		return false;
+		return letter.isAVowel();
 	};
 
 	this.translate = function(phrase){
 		var letters = phrase.split("");
-		for(c = 0; c < letters.length; c++){
-			if (letters[c] == " ");
-			else if (this.isVowel(letters[c]) === false)
+		for(c=0; c < letters.length; c++){
+			if(letters[c] == " ");
+			else if (letters[c].isAVowel() === false)
 				letters[c] = letters[c] + "o" + letters[c];
 		}
-		console.log(letters.join(""));
 		return letters.join("");
 	};
 
-	this.sum = function(numbers){
-		var total = 0;
-		for (i=0; i < numbers.length; i++){
-			total += numbers[i];
-		}
-		return total;
-	};
-
-	this.multiply = function(numbers){
-		var total = 1;
-		for (i=0; i < numbers.length; i++){
-			total *= numbers[i];
-		}
-		return total;
-	};
-
-	this.reverse = function(string){
-		return string.split("").reverse().join("");
+	this.reverse = function(phrase){
+		return phrase.split("").reverse().join("");
 	};
 
 	this.findLongestWord = function(words){
-		var sorted = words.sort(function(a,b){return a.length - b.length});
-		return sorted[sorted.length -1];
+		return words.sortByLengthAsc().pop();
 	};
 
 	this.filterLongWords = function(words, max){
-		var longWords = [];
-		for (i=0; i < words.length; i++){
-			if (words[i].length > max)
-				longWords.push(words[i]);
-		}
-		console.log(longWords);
-		return longWords;
+		console.log(words.filter(function(x){return x.length > max}));
 	};
 
-	this.charFreq = function(string){
-		var freq = {};
-		var chars = string.split("");
-		for (i=0; i < chars.length; i++){
-			freq[chars[i]] = 0;
-		}
-		for (i=0; i < chars.length; i++){
-			freq[chars[i]] ++;
-		}
-		console.log(freq);
-		return freq;
+	this.charFreq = function(phrase){
+		
 	};
+
 };
 
+
 test = new Test();
-console.log(test.max(2,4) == 4);
-console.log(test.max(2,-4) == 2);
-console.log(test.maxOfThree([2,3,5]) == 5);
-console.log(test.maxOfThree([-2,-3,-5]) == -2);
-console.log(test.isVowel("e") === true);
+console.log(test.max(1,3) ==  3);
+console.log(test.max(-1,-3) == -1);
+console.log(test.maxOfThree([2,4,5]) == 5);
+console.log(test.maxOfThree([-2,-4,-5]) == -2);
+console.log(test.isVowel("e") ===  true);
 console.log(test.isVowel("b") === false);
 console.log(test.translate("this is fun") == "tothohisos isos fofunon");
-console.log(test.sum([1,2,3]) == 6);
-console.log(test.multiply([1,2,3]) == 6);
-console.log(test.reverse("chicken") == "nekcihc");
-console.log(test.findLongestWord(["big", "bacon", "bits", "boob"]) == "bacon");
-console.log(test.filterLongWords(["big", "bacon", "bits", "boob"], 4) == ["bacon"]);
-console.log(test.charFreq("abcddbcaabbdcd") == {"a": 3, "b": 4, "c": 3, "d": 4});
+console.log([1,2,3].sum() == 6);
+console.log([1,2,3].multiply() == 6);
+console.log(test.reverse("bacon bits") == "stib nocab");
+console.log(test.findLongestWord(["chicken", "nuggets", "sucka", "boob", "testicles"]) == "testicles");
+console.log(test.filterLongWords(["chicken", "nuggets", "sucka", "boob", "testicles"], 5) == ["chicken", "nuggets", "testicles"]);
+console.log(test.charFreq("aabbddssccc") == {"a":2, "b":2, "d":2, "s": 2,"c": 3});
 
 
 
