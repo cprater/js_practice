@@ -78,7 +78,15 @@ var Test = function(){
 	};
 
 	this.charFreq = function(phrase){
-		
+		freq ={};
+		letters = phrase.split("");
+		for(i = 0; i < letters.length; i++){
+			if(letters[i] in freq)
+				freq[letters[i]] ++;
+			else
+				freq[letters[i]] = 1;
+		}
+		console.log(freq);
 	};
 
 };
